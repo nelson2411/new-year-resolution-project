@@ -18,12 +18,15 @@ export const persistConfig = {
   storage,
 }
 
-const persistReducers = persistReducer(persistConfig, todoReducer)
+const persistReducers = persistReducer(
+  persistConfig,
+  combineReducers({
+    todos: todoReducer,
+  })
+)
 
 export const store = configureStore({
-  reducer: {
-    todos: persistReducers,
-  },
+  reducer: persistReducers,
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({
       serializableCheck: {
