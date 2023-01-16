@@ -25,24 +25,12 @@ export const todoSlice = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action: PayloadAction<Todo>) => {
-      state.todos.push({
-        id: parseInt(uuidv4().replace(/-/g, ""), 16),
-        title: action.payload.title,
-        completed: false,
-      })
+      state.todos = [...state.todos, action.payload]
     },
-    toggleTodo: (state, action: PayloadAction<number>) => {
-      state.todos = state.todos.map((todo) => {
-        if (todo.id === action.payload) {
-          return {
-            ...todo,
-            completed: !todo.completed,
-          }
-        }
-        return todo
-      })
+    toggleTodo: (state, action: PayloadAction<Todo[]>) => {
+      state.todos = action.payload
     },
-    deleteTodo: (state, action: PayloadAction<number>) => {
+    deleteTodo: (state, action: PayloadAction<string>) => {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload)
     },
   },

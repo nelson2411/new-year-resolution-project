@@ -1,27 +1,31 @@
 import React from "react"
 import { v4 as uuidv4 } from "uuid"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addTodo } from "../../redux/slices/todoSlice"
+import { selectTodos } from "../../redux/slices/todoSlice"
 import { Todo } from "../../types"
 
 const InputField = () => {
   const inputRef = React.useRef<HTMLInputElement>(null)
+  const todos = useSelector(selectTodos)
+
   const dispatch = useDispatch()
 
   const handleSubmit = React.useCallback(
-    (e: React.FormEvent) => {
+    (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       if (inputRef.current) {
-        const newTodo: Todo = {
-          id: parseInt(uuidv4().replace(/-/g, ""), 16),
-          title: inputRef.current.value,
-          completed: false,
-        }
-        dispatch(addTodo(newTodo))
+        dispatch(
+          addTodo({
+            id: uuidv4(),
+            title: inputRef.current.value,
+            completed: false,
+          })
+        )
         inputRef.current.value = ""
       }
     },
-    [dispatch, inputRef]
+    [dispatch]
   )
 
   return (
