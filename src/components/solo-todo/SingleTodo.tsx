@@ -5,14 +5,13 @@ import { Draggable } from "react-beautiful-dnd"
 import { Todo } from "../../types"
 
 type Props = {
-  index: number
-
   todo: Todo
+  index: number
 }
 
 // Droppable id is "todos" in TodoList.tsx
 
-const SingleTodo = ({ index, todo }: Props) => {
+const SingleTodo = ({ todo, index }: Props) => {
   return (
     <div>
       <Draggable draggableId={todo.id.toString()} index={index}>

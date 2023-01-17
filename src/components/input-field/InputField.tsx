@@ -19,6 +19,7 @@ const InputField = () => {
           addTodo({
             id: uuidv4(),
             title: inputRef.current.value,
+            category: "todos",
             completed: false,
           })
         )

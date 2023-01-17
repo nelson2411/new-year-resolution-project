@@ -3,10 +3,11 @@ import logo from "./logo.svg"
 import InputField from "./components/input-field/InputField"
 import TodoList from "./components/todo-list/TodoList"
 import CompleteList from "./components/complete-list/CompleteList"
+import FinancialTodos from "./components/financial-todos/FinancialTodos"
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
 import { useSelector, useDispatch } from "react-redux"
 import { selectTodos } from "./redux/slices/todoSlice"
-import { toggleTodo } from "./redux/slices/todoSlice"
+import { toggleTodo, moveTodo } from "./redux/slices/todoSlice"
 import "./App.css"
 
 function App() {
@@ -45,17 +46,14 @@ with the new order of the todos array.
 
       if (
         destination.droppableId === "todosList" ||
-        destination.droppableId === "completedTodosList" ||
-        destination.droppableId === "onHoldTodosList"
+        destination.droppableId === "financialTodosList" ||
+        destination.droppableId === "personalImprovementTodosList" ||
+        destination.droppableId === "healthTodosList" ||
+        destination.droppableId === "completedTodosList"
       ) {
-        // create a new array from the existing todos array
-        const newTodos = Array.from(todos)
-        // remove the todo item from its original index
-        const [reorderedTodo] = newTodos.splice(source.index, 1)
-        // insert the todo item at the new index
-        newTodos.splice(destination.index, 0, reorderedTodo)
-        // dispatch the toggleTodo action with the updated todos array
-        dispatch(toggleTodo(newTodos))
+        // if the destination is one of the categories then update the redux store
+        // with the new order of the todos array
+        dispatch(moveTodo({ source, destination }))
       }
     },
     [todos, dispatch]
@@ -67,7 +65,7 @@ with the new order of the todos array.
         <InputField />
         <h1>React Redux TypeScript</h1>
         <TodoList todos={todos} />
-        <CompleteList todos={todos} />
+        <FinancialTodos />
       </DragDropContext>
     </>
   )
