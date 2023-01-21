@@ -1,17 +1,32 @@
-/*
-There are five different arrays of todos. One for each category.
-When a todo is created it will be added to the todos array.
-And then moved can be moved to the appropriate category.
-Each category will start with an empty array.
-Each todo is an object with an id, title. 
-In order to move a todo to a different category we need to know which category it is in.
+import { AnyAction } from "@reduxjs/toolkit"
 
-The categroy property will be used to move a todo to a different category.
+/*
+The Todo interface is used to define the type of the todo object.
+The TActionSlice interface is used to define the type of the object that is passed to the action.
+The TUpdatedTextShowed interface is used to define the type of the object that is passed to the action.
+Omit is a utility type that returns a type that excludes the specified properties from the type.
+The ColumLayoutProps interface is used to define the type of the props that are passed to 
+the ColumnLayout component.
 */
 
 export interface Todo {
   id: string
-  title: string
-  completed: boolean
-  category: string
+  text: string
+  isCompleted: boolean
+  createdAt?: string
+  updatedAt?: string
+  isTextShowed?: boolean
+}
+
+export type TActionSlice = Omit<Todo, "text">
+export type TUpdatedTextShowed = Omit<TActionSlice, "isCompleted">
+
+export interface ColumnLayoutProps {
+  labelText: string
+  addHandler: (v: string) => AnyAction
+  removeHandler: (v: string) => AnyAction
+  completeHandler: (v: TActionSlice) => AnyAction
+  selectorState: Todo[]
+  droppableId: string
+  updateTextShowed: (v: TUpdatedTextShowed) => AnyAction
 }

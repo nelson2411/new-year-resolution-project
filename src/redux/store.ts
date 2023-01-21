@@ -10,7 +10,9 @@ import {
   REHYDRATE,
 } from "redux-persist"
 import { combineReducers } from "redux"
-import todoReducer from "./slices/todoSlice"
+import { todoSlice } from "./slices/todoSlice"
+import { isDoneSlice } from "./slices/isDoneSlice"
+import { inProgressSlice } from "./slices/inProgressSlice"
 
 export const persistConfig = {
   key: "root",
@@ -21,7 +23,9 @@ export const persistConfig = {
 const persistReducers = persistReducer(
   persistConfig,
   combineReducers({
-    todos: todoReducer,
+    done: isDoneSlice.reducer,
+    todo: todoSlice.reducer,
+    inProgress: inProgressSlice.reducer,
   })
 )
 

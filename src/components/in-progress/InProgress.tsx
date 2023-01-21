@@ -2,30 +2,30 @@ import React from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 import { Todo } from "../../types"
-import { isDoneSlice } from "../../redux/slices/isDoneSlice"
+import { inProgressSlice } from "../../redux/slices/inProgressSlice"
 import ColumnLayout from "../column-layout/ColumnLayout"
 import { Container } from "react-bootstrap"
 
-const CompleteList = () => {
-  const { done } = useSelector((state: RootState) => state)
+const InProgress = () => {
+  const { inProgress } = useSelector((state: RootState) => state)
 
   const {
     actions: { add, complete, remove, updateTextShowed },
-  } = isDoneSlice
+  } = inProgressSlice
 
   return (
     <Container>
       <ColumnLayout
-        droppableId="done"
-        labelText="Done"
+        droppableId="inProgress"
+        labelText="In Progress"
         addHandler={add}
         completeHandler={complete}
         removeHandler={remove}
         updateTextShowed={updateTextShowed}
-        selectorState={done}
+        selectorState={inProgress}
       />
     </Container>
   )
 }
 
-export default CompleteList
+export default InProgress
