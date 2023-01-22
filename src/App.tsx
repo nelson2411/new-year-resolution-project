@@ -11,7 +11,7 @@ import TodoList from "./components/todo-list/TodoList"
 import InProgress from "./components/in-progress/InProgress"
 import CompleteList from "./components/complete-list/CompleteList"
 import GlobalStyles from "./components/global-styles/GlobalStyles"
-import { MainContainer } from "./App.styles"
+import { MainContainer, MainRow } from "./App.styles"
 import Title from "./components/title/Title"
 import Footer from "./components/footer/Footer"
 import { Row, Col, Container } from "react-bootstrap"
@@ -56,7 +56,7 @@ function App() {
       <DragDropContext onDragEnd={(res) => onDragEnd(res)}>
         <Title />
         <MainContainer>
-          <Row>
+          <MainRow>
             <Col>
               <TodoList />
             </Col>
@@ -66,7 +66,7 @@ function App() {
             <Col>
               <CompleteList />
             </Col>
-          </Row>
+          </MainRow>
         </MainContainer>
       </DragDropContext>
       <Footer />
