@@ -10,6 +10,10 @@ import { Todo } from "./types"
 import TodoList from "./components/todo-list/TodoList"
 import InProgress from "./components/in-progress/InProgress"
 import CompleteList from "./components/complete-list/CompleteList"
+import GlobalStyles from "./components/global-styles/GlobalStyles"
+import { MainContainer } from "./App.styles"
+import Title from "./components/title/Title"
+import Footer from "./components/footer/Footer"
 import { Row, Col, Container } from "react-bootstrap"
 import "./App.css"
 
@@ -48,9 +52,10 @@ function App() {
 
   return (
     <>
+      <GlobalStyles />
       <DragDropContext onDragEnd={(res) => onDragEnd(res)}>
-        <h1>React Redux TypeScript</h1>
-        <Container>
+        <Title />
+        <MainContainer>
           <Row>
             <Col>
               <TodoList />
@@ -62,8 +67,9 @@ function App() {
               <CompleteList />
             </Col>
           </Row>
-        </Container>
+        </MainContainer>
       </DragDropContext>
+      <Footer />
     </>
   )
 }

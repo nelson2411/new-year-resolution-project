@@ -16,6 +16,7 @@ import {
 } from "react-bootstrap"
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai"
 import { BsTrash } from "react-icons/bs"
+import { MdControlPoint } from "react-icons/md"
 
 const ColumnLayout: React.FC<ColumnLayoutProps> = ({
   labelText,
@@ -87,6 +88,7 @@ const ColumnLayout: React.FC<ColumnLayoutProps> = ({
             onKeyDown={handleInputKeyDown}
             onBlur={handleOnBlur}
             value={textDescription}
+            className="shadow p-2 my-2"
           />
         </Form.Group>
         <Button
@@ -100,13 +102,18 @@ const ColumnLayout: React.FC<ColumnLayoutProps> = ({
           disabled={
             textDescription.length === 0 || textDescription.length > 200
           }
+          className="shadow my-2"
         >
-          Add task
+          <MdControlPoint size={30} />
         </Button>
       </Form>
       <Droppable droppableId={droppableId}>
         {(provided) => (
-          <ListGroup {...provided.droppableProps} ref={provided.innerRef}>
+          <ListGroup
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            className="shadow p-3 bg-success bg-gradient mt-3"
+          >
             {selectorState.map(
               (
                 { id, text, isCompleted, createdAt, updatedAt, isTextShowed },
@@ -119,31 +126,10 @@ const ColumnLayout: React.FC<ColumnLayoutProps> = ({
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <span
-                        style={{
-                          textDecoration: isCompleted ? "line-through" : "none",
-                        }}
-                      >
-                        {isTextShowed ? text : "********"}
-                      </span>
-                      <Button
-                        variant="danger"
-                        onClick={() =>
-                          dispatch(
-                            updateTextShowed({
-                              id,
-                              isTextShowed: !isTextShowed,
-                            })
-                          )
-                        }
-                      >
-                        <AiOutlineArrowDown />
-                      </Button>
                       <span>
                         {updatedAt
                           ? `Updated at: ${updatedAt.toLocaleString()}`
-                          : `Created at: ${createdAt}`}
-                        {updatedAt || createdAt}
+                          : `Created at: ${createdAt?.toLocaleString()}`}
                       </span>
                       <p>{text}</p>
                       <div>
