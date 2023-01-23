@@ -9,6 +9,13 @@ export const FooterContainer = styled.footer`
   padding: 20px 0;
   font-size: 1.2rem;
   margin-top: 20px;
+  background: rgb(74, 82, 218);
+  background: radial-gradient(
+    circle,
+    rgba(74, 82, 218, 1) 0%,
+    rgba(8, 8, 68, 1) 100%
+  );
+  color: white;
 `
 
 export const FooterTextContainer = styled.div`
@@ -22,6 +29,7 @@ export const FooterSocialContainer = styled.div`
   }
   & > li > a {
     text-decoration: none;
+    color: white;
   }
   & > li > a:hover {
     /* add lightness to the color */

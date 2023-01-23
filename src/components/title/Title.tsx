@@ -6,7 +6,7 @@ const Title = () => {
     <Container>
       <h1 className="text-center mt-5">New Year's Resolutions</h1>
       <h3 className="text-center my-2">What are your goals for 2023?</h3>
-      <h5>Instruccions:</h5>
+      <h5>Instructions:</h5>
       <ul>
         <li>Basically, you can add and delete your goals</li>
         <li>
